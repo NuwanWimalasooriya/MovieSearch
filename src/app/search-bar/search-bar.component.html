@@ -1,0 +1,14 @@
+<div class="col s12">
+  <form materialize>
+    <div class="row">
+      <div class="input-field col offset-s0 s12" (click)="startNewSearch.emit()">
+        <input id="first_name" type="text" class="validate" placeholder="Search movie" name="search" [(ngModel)]="search" (input)="search$.next(search)">
+      </div>
+    </div>
+  </form>
+  <div *ngIf="!showingMovie" class="row">
+    <app-movie-search-item *ngFor="let movie of searchResults; let i = index" [index]="i" (click)="setCurrentMovie(movie)" [movie]="movie"></app-movie-search-item>
+  </div>
+  <h3 *ngIf="!fetching && searchResults.length === 0 && search.length > 0" [ngStyle]="{'text-align': 'center'}">No results found for {{search}}</h3>
+
+</div>
